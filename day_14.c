@@ -1,0 +1,55 @@
+//check identity matrix 
+#include <stdio.h>
+
+int main() {
+    int n;
+
+    scanf("%d", &n);
+
+    int matrix[n][n];
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (i == j && matrix[i][j] != 1) {
+                printf("Not an Identity Matrix\n");
+                return 0;
+            }
+            if (i != j && matrix[i][j] != 0) {
+                printf("Not an Identity Matrix\n");
+                return 0;
+            }
+        }
+    }
+
+    printf("Identity Matrix\n");
+    return 0;
+}
+//rotate image 
+void rotate(int** matrix, int matrixSize, int* matrixColSize) {
+    int n = matrixSize;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            int temp = matrix[i][j];
+            matrix[i][j] = matrix[j][i];
+            matrix[j][i] = temp;
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        int left = 0, right = n - 1;
+        while (left < right) {
+            int temp = matrix[i][left];
+            matrix[i][left] = matrix[i][right];
+            matrix[i][right] = temp;
+            left++;
+            right--;
+        }
+    }
+}
